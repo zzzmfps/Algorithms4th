@@ -109,19 +109,19 @@ public class Section1 {
     }
 
     public static void exercise21() {
-        class Person {
+        final class Person {
             private String name;
             private int x, y;
             private double ratio;
 
-            Person() {
+            private Person() {
                 this.name = StdIn.readString();
                 this.x = StdIn.readInt();
                 this.y = StdIn.readInt();
                 this.ratio = Double.valueOf(x) / Double.valueOf(y);
             }
 
-            public void print() {
+            private void print() {
                 StdOut.printf("%s\t%d\t%d\t%.3f\n", this.name, this.x, this.y, this.ratio);
             }
         }
@@ -289,7 +289,7 @@ public class Section1 {
         StdStats.plotBars(counts);
     }
 
-    static class exercise33 {
+    public static class exercise33 {
 
         public static double dot(double[] x, double[] y) {
             // assert x.length == y.length;
@@ -434,8 +434,8 @@ public class Section1 {
             }
         }
         long t3 = System.currentTimeMillis();
-        System.out.println("binary search: " + (t2 - t1));
-        System.out.println("brute force: " + (t3 - t2));
+        StdOut.printf("binary search:\t%d ms\n", t2 - t1);
+        StdOut.printf("brute force:\t%d ms\n", t3 - t2);
     }
 
     private static boolean __exercise38_1(int[] arr, int target) { // binary search
