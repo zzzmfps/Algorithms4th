@@ -3,6 +3,8 @@ package chapter1;
 import java.util.LinkedList;
 import java.util.List;
 
+import chapter1.section1.Matrix;
+import chapter1.section1.Person;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -12,7 +14,7 @@ import edu.princeton.cs.algs4.StdStats;
 public class Section1 {
 
     public static void exercise3() {
-        int[] ints = new int[3];
+        final int[] ints = new int[3];
         for (int i = 0; i < 3; ++i) {
             ints[i] = StdIn.readInt();
         }
@@ -23,7 +25,7 @@ public class Section1 {
         }
     }
 
-    public static void exercise5(double x, double y) {
+    public static void exercise5(final double x, final double y) {
         if (x > 0.0 && x < 1.0 && y > 0.0 && y < 1.0) {
             StdOut.println("true");
         } else {
@@ -31,9 +33,9 @@ public class Section1 {
         }
     }
 
-    public static String exercise9(int N) {
+    public static String exercise9(final int N) {
         // Integer.toBinaryString(i);
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         for (int n = N; n > 0; n >>= 1) {
             sb.append(0 == (n & 1) ? '0' : '1');
         }
@@ -66,13 +68,13 @@ public class Section1 {
         if (null == mat) {
             mat = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 0, 1, 2 } };
         }
-        int[][] newMat = new int[mat[0].length][mat.length];
+        final int[][] newMat = new int[mat[0].length][mat.length];
         for (int i = 0; i < mat.length; ++i) {
             for (int j = 0; j < mat[0].length; ++j) {
                 newMat[j][i] = mat[i][j];
             }
         }
-        for (int[] nm : newMat) {
+        for (final int[] nm : newMat) {
             for (int i = 0; i < nm.length; ++i) {
                 StdOut.print((i > 0 ? " " : "") + nm[i]);
             }
@@ -94,14 +96,14 @@ public class Section1 {
             M = 10;
             a = new int[] { 0, 5, 2, 3, 6, 9, 7, 0, 1, 1, 2, 3, 6, 8, 2, 3, 4, 0, 1, 4 };
         }
-        int[] res = new int[M];
-        for (int v : a) {
+        final int[] res = new int[M];
+        for (final int v : a) {
             ++res[v];
         }
         return res;
     }
 
-    public static double exercise20(int N) {
+    public static double exercise20(final int N) {
         if (1 == N) {
             return 0.0;
         }
@@ -109,39 +111,23 @@ public class Section1 {
     }
 
     public static void exercise21() {
-        final class Person {
-            private String name;
-            private int x, y;
-            private double ratio;
-
-            private Person() {
-                this.name = StdIn.readString();
-                this.x = StdIn.readInt();
-                this.y = StdIn.readInt();
-                this.ratio = Double.valueOf(x) / Double.valueOf(y);
-            }
-
-            private void print() {
-                StdOut.printf("%s\t%d\t%d\t%.3f\n", this.name, this.x, this.y, this.ratio);
-            }
-        }
-        List<Person> list = new LinkedList<>();
+        final List<Person> list = new LinkedList<>();
         while (!StdIn.isEmpty()) {
             list.add(new Person());
         }
-        for (Person person : list) {
+        for (final Person person : list) {
             person.print();
         }
     }
 
-    public static int exercise22(int[] arr, int target) {
+    public static int exercise22(int[] arr, final int target) {
         if (null == arr) {
             arr = new int[] { 1, 3, 3, 5, 6, 8, 12, 19, 20, 20 };
         }
         return __exercise22(arr, target, 0, arr.length, 0);
     }
 
-    private static int __exercise22(int[] arr, int target, int l, int r, int depth) {
+    private static int __exercise22(final int[] arr, final int target, int l, int r, final int depth) {
         for (int i = 0; i < depth; ++i) {
             StdOut.print(' ');
         }
@@ -149,7 +135,7 @@ public class Section1 {
         if (l >= r) {
             return -1;
         }
-        int mid = l + (r - l) / 2;
+        final int mid = l + (r - l) / 2;
         if (target == arr[mid]) {
             return mid;
         }
@@ -161,15 +147,15 @@ public class Section1 {
         return __exercise22(arr, target, l, r, depth + 1);
     }
 
-    public static int exercise23(int[] arr, int target, char mark) {
-        int res = exercise22(arr, target);
+    public static int exercise23(final int[] arr, final int target, final char mark) {
+        final int res = exercise22(arr, target);
         if (res < 0 && '+' == mark || res >= 0 && '-' == mark) {
             StdOut.println(target);
         }
         return res;
     }
 
-    public static int exercise24(int p, int q, boolean printCallStack) {
+    public static int exercise24(final int p, final int q, final boolean printCallStack) {
         if (printCallStack) {
             StdOut.printf("%d %d\n", p, q);
         }
@@ -179,7 +165,7 @@ public class Section1 {
         return exercise24(q, p % q, printCallStack);
     }
 
-    public static int exercise28(int[] arr) { // arr is sorted
+    public static int exercise28(final int[] arr) { // arr is sorted
         int last = Integer.MIN_VALUE;
         int p1 = 0;
         for (int p2 = 0; p2 < arr.length; ++p2) {
@@ -191,25 +177,25 @@ public class Section1 {
         return p1; // as new end of uniqued `arr`
     }
 
-    public static int exercise29_1(int[] arr, int key) { // as `rank`
+    public static int exercise29_1(int[] arr, final int key) { // as `rank`
         if (null == arr) {
             arr = new int[] { 1, 3, 3, 5, 6, 8, 12, 19, 20, 20 };
         }
         return 1 + __exercise29_1(arr, key);
     }
 
-    public static int exercise29_2(int[] arr, int key) { // as `count`
+    public static int exercise29_2(int[] arr, final int key) { // as `count`
         if (null == arr) {
             arr = new int[] { 1, 3, 3, 5, 6, 8, 12, 19, 20, 20 };
         }
-        int lt = 1 + __exercise29_1(arr, key);
-        int le = __exercise29_2(arr, key);
+        final int lt = 1 + __exercise29_1(arr, key);
+        final int le = __exercise29_2(arr, key);
         return le - lt;
     }
 
-    private static int __exercise29_1(int[] arr, int key) { // find index of max({n < key})
+    private static int __exercise29_1(final int[] arr, final int key) { // find index of max({n < key})
         for (int l = 0, r = arr.length; l < r;) {
-            int mid = l + (r - l) / 2;
+            final int mid = l + (r - l) / 2;
             if (arr[mid] < key && (mid + 1 == arr.length || arr[mid + 1] >= key)) {
                 return mid;
             }
@@ -222,9 +208,9 @@ public class Section1 {
         return -1;
     }
 
-    private static int __exercise29_2(int[] arr, int key) { // find index of min({n > key})
+    private static int __exercise29_2(final int[] arr, final int key) { // find index of min({n > key})
         for (int l = 0, r = arr.length; l < r;) {
-            int mid = l + (r - l) / 2;
+            final int mid = l + (r - l) / 2;
             if (arr[mid] > key && (0 == mid || arr[mid - 1] <= key)) {
                 return mid;
             }
@@ -237,8 +223,8 @@ public class Section1 {
         return arr.length;
     }
 
-    public static boolean[][] exercise30(int i, int j) {
-        boolean[][] res = new boolean[i][j];
+    public static boolean[][] exercise30(final int i, final int j) {
+        final boolean[][] res = new boolean[i][j];
         for (int m = 2; m < i; ++m) {
             for (int n = 2; n < j; ++n) {
                 res[m][n] = (1 != exercise24(m, n, false));
@@ -247,19 +233,19 @@ public class Section1 {
         return res;
     }
 
-    public static void exercise31(int N, double p) {
-        double x = 0.5, y = 0.5, r = 0.3;
+    public static void exercise31(final int N, final double p) {
+        final double x = 0.5, y = 0.5, r = 0.3;
         StdDraw.circle(x, y, r);
 
-        double radius = 2.0 * Math.PI / N;
-        List<double[]> points = new LinkedList<>();
+        final double radius = 2.0 * Math.PI / N;
+        final List<double[]> points = new LinkedList<>();
         for (int i = 0; i < N; ++i) {
-            double cur = i * radius;
-            double cos = Math.cos(cur), sin = Math.sin(cur);
+            final double cur = i * radius;
+            final double cos = Math.cos(cur), sin = Math.sin(cur);
             points.add(new double[] { x + r * cos, y + r * sin });
         }
 
-        for (double[] ds : points) {
+        for (final double[] ds : points) {
             StdDraw.filledCircle(ds[0], ds[1], 0.05);
         }
         StdDraw.setPenColor(StdDraw.GRAY);
@@ -273,84 +259,55 @@ public class Section1 {
         StdDraw.setPenColor();
     }
 
-    public static void exercise32(int N, double l, double r) {
-        double range = (r - l) / N;
-        double[] counts = new double[N];
+    public static void exercise32(final int N, final double l, final double r) {
+        final double range = (r - l) / N;
+        final double[] counts = new double[N];
         while (!StdIn.isEmpty()) {
-            double val = StdIn.readDouble();
+            final double val = StdIn.readDouble();
             if (val > l & val < r) {
                 counts[Double.valueOf(val / range).intValue()] += 1;
             }
         }
-        double max = StdStats.max(counts);
+        final double max = StdStats.max(counts);
         for (int i = 0; i < N; ++i) {
             counts[i] /= max;
         }
         StdStats.plotBars(counts);
     }
 
-    public static class exercise33 {
-
-        public static double dot(double[] x, double[] y) {
-            // assert x.length == y.length;
-            double res = 0.0;
-            for (int i = 0; i < x.length; ++i) {
-                res += x[i] * y[i];
-            }
-            return res;
-        }
-
-        public static double[][] mult(double[][] a, double[][] b) {
-            // assert 0 != a.length && a[0].length == b.length;
-            double[][] res = new double[a.length][b[0].length];
-            for (int i = 0; i < a.length; ++i) {
-                for (int j = 0; j < b[0].length; ++j) {
-                    for (int k = 0; k < b.length; ++k) {
-                        res[i][j] += a[i][k] * b[k][j];
-                    }
-                }
-            }
-            return res;
-        }
-
-        public static double[][] transpose(double[][] a) {
-            // assert 0 != a.length;
-            double[][] res = new double[a[0].length][a.length];
-            for (int i = 0; i < a.length; ++i) {
-                for (int j = 0; j < a[0].length; ++j) {
-                    res[j][i] = a[i][j];
-                }
-            }
-            return res;
-        }
-
-        public static double[] mult(double[][] a, double[] x) {
-            // assert 0 != a.length && a[0].length == x.length;
-            double[] res = new double[a.length];
-            for (int i = 0; i < a.length; ++i) {
-                for (int k = 0; k < x.length; ++k) {
-                    res[i] += a[i][k] * x[k];
-                }
-            }
-            return res;
-        }
-
-        public static double[] mult(double[] y, double[][] a) {
-            // assert 0 != y.length && y.length == a.length;
-            double[] res = new double[a[0].length];
-            for (int i = 0; i < a[0].length; ++i) {
-                for (int k = 0; k < y.length; ++k) {
-                    res[i] += y[k] * a[k][i];
-                }
-            }
-            return res;
-        }
-
+    public static void exercise33() {
+        final double[] v1 = { 1.0, 2.0, 3.0 };
+        final double[] v2 = { 4.0, 5.0, 6.0 };
+        final double[][] m1 = { { 1.0, 2.0, 3.0 }, { 4.0, 5.0, 6.0 } };
+        final double[][] m2 = { { 1.0, 2.0 }, { 3.0, 4.0 }, { 5.0, 6.0 } };
+        StdOut.println(Matrix.dot(v1, v2));
+        StdOut.println("***************");
+        __exercise33(Matrix.mult(m1, m2));
+        StdOut.println("***************");
+        __exercise33(Matrix.mult(v1, m2));
+        StdOut.println("***************");
+        __exercise33(Matrix.mult(m1, v2));
+        StdOut.println("***************");
+        __exercise33(Matrix.transpose(m1));
     }
 
-    public static void exercise36(int M, int N) { // as `ShuffleTest`
-        int[][] counts = new int[M][M];
-        int[] arr = new int[M];
+    private static void __exercise33(final double[] x) {
+        for (int i = 0; i < x.length; ++i) {
+            StdOut.printf("%.3f%s", x[i], x.length == i + 1 ? "\n" : " ");
+        }
+    }
+
+    private static void __exercise33(final double[][] x) {
+        for (int i = 0; i < x.length; ++i) {
+            for (int j = 0; j < x[i].length; ++j) {
+                StdOut.printf("%.3f%s", x[i][j], x[i].length == j + 1 ? "\n" : " ");
+            }
+        }
+    }
+
+    public static void exercise36(final int M, final int N) { // as `ShuffleTest`
+        final int[][] counts = new int[M][M];
+        final int[] arr = new int[M];
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
                 arr[j] = j;
@@ -360,7 +317,7 @@ public class Section1 {
                 ++counts[arr[j]][j];
             }
         }
-        for (int[] row : counts) {
+        for (final int[] row : counts) {
             for (int i = 0; i < M; ++i) {
                 StdOut.print((i > 0 ? "\t" : "") + row[i]);
             }
@@ -368,19 +325,19 @@ public class Section1 {
         }
     }
 
-    private static void __exercise36(int[] a) { // p19 sheet 1.1.10 shuffle for int
-        int N = a.length;
+    private static void __exercise36(final int[] a) { // p19 sheet 1.1.10 shuffle for int
+        final int N = a.length;
         for (int i = 0; i < N; ++i) {
-            int r = i + StdRandom.uniform(N - i);
-            int temp = a[i];
+            final int r = i + StdRandom.uniform(N - i);
+            final int temp = a[i];
             a[i] = a[r];
             a[r] = temp;
         }
     }
 
-    public static void exercise37(int M, int N) { // exactly same with exercise36
-        int[][] counts = new int[M][M];
-        int[] arr = new int[M];
+    public static void exercise37(final int M, final int N) { // exactly same with exercise36
+        final int[][] counts = new int[M][M];
+        final int[] arr = new int[M];
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
                 arr[j] = j;
@@ -390,7 +347,7 @@ public class Section1 {
                 ++counts[arr[j]][j];
             }
         }
-        for (int[] row : counts) {
+        for (final int[] row : counts) {
             for (int i = 0; i < M; ++i) {
                 StdOut.print((i > 0 ? "\t" : "") + row[i]);
             }
@@ -398,11 +355,11 @@ public class Section1 {
         }
     }
 
-    private static void __exercise37(int[] a) { // random in [0, N), instead of [i, N)
-        int N = a.length;
+    private static void __exercise37(final int[] a) { // random in [0, N), instead of [i, N)
+        final int N = a.length;
         for (int i = 0; i < N; ++i) {
-            int r = StdRandom.uniform(N);
-            int temp = a[i];
+            final int r = StdRandom.uniform(N);
+            final int temp = a[i];
             a[i] = a[r];
             a[r] = temp;
         }
@@ -421,27 +378,27 @@ public class Section1 {
         if (round <= 0) {
             round = 1;
         }
-        long t1 = System.currentTimeMillis();
+        final long t1 = System.currentTimeMillis();
         for (int i = 0; i < round; ++i) {
-            for (int val : T) {
+            for (final int val : T) {
                 __exercise38_1(W, val);
             }
         }
-        long t2 = System.currentTimeMillis();
+        final long t2 = System.currentTimeMillis();
         for (int i = 0; i < round; ++i) {
-            for (int val : T) {
+            for (final int val : T) {
                 __exercise38_2(W, val);
             }
         }
-        long t3 = System.currentTimeMillis();
+        final long t3 = System.currentTimeMillis();
         StdOut.printf("binary search:\t%d ms\n", t2 - t1);
         StdOut.printf("brute force:\t%d ms\n", t3 - t2);
     }
 
-    private static boolean __exercise38_1(int[] arr, int target) { // binary search
+    private static boolean __exercise38_1(final int[] arr, final int target) { // binary search
         int l = 0, r = arr.length;
         while (l < r) {
-            int mid = l + (r - l) / 2;
+            final int mid = l + (r - l) / 2;
             if (target == arr[mid]) {
                 return true;
             }
@@ -454,8 +411,8 @@ public class Section1 {
         return false;
     }
 
-    private static boolean __exercise38_2(int[] arr, int target) { // brute force
-        for (int val : arr) {
+    private static boolean __exercise38_2(final int[] arr, final int target) { // brute force
+        for (final int val : arr) {
             if (target == val) {
                 return true;
             }
@@ -463,9 +420,9 @@ public class Section1 {
         return false;
     }
 
-    public static void exercise39(int T) {
-        int[] N = { 1000, 10000, 100000, 1000000 };
-        int[] counts = { 0, 0, 0, 0 };
+    public static void exercise39(final int T) {
+        final int[] N = { 1000, 10000, 100000, 1000000 };
+        final int[] counts = { 0, 0, 0, 0 };
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < T; ++j) {
                 counts[i] += __exercise39(N[i]);
@@ -476,14 +433,14 @@ public class Section1 {
         }
     }
 
-    private static int __exercise39(int N) {
-        int[] arr1 = new int[N], arr2 = new int[N];
+    private static int __exercise39(final int N) {
+        final int[] arr1 = new int[N], arr2 = new int[N];
         for (int i = 0; i < N; ++i) {
             arr1[i] = 100000 + StdRandom.uniform(900000);
             arr2[i] = 100000 + StdRandom.uniform(900000);
         }
         int count = 0;
-        for (int i : arr1) {
+        for (final int i : arr1) {
             if (__exercise38_1(arr2, i)) {
                 ++count;
             }
@@ -491,7 +448,7 @@ public class Section1 {
         return count;
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
     }
 
 }
