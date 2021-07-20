@@ -1,5 +1,10 @@
 package chapter1.section2;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import edu.princeton.cs.algs4.StdIn;
+
 public class Date {
 
     private final int year;
@@ -29,6 +34,19 @@ public class Date {
 
     public int day() {
         return this.day;
+    }
+
+    public static Date[] readDates() {
+        final List<Date> list = new LinkedList<>();
+        while (!StdIn.isEmpty()) {
+            final String in = StdIn.readLine();
+            list.add(new Date(in));
+        }
+        final Date[] res = new Date[list.size()];
+        for (int i = 0; i < list.size(); ++i) {
+            res[i] = list.get(i);
+        }
+        return res; // ClassCastException with `(Date[]) list.toArray()`
     }
 
     @Override

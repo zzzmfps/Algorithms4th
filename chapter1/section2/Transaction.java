@@ -1,5 +1,10 @@
 package chapter1.section2;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import edu.princeton.cs.algs4.StdIn;
+
 public class Transaction implements Comparable<Transaction> {
 
     private final String who;
@@ -29,6 +34,19 @@ public class Transaction implements Comparable<Transaction> {
 
     public double amount() {
         return this.amount;
+    }
+
+    public static Transaction[] readTransactions() {
+        final List<Transaction> list = new LinkedList<>();
+        while (!StdIn.isEmpty()) {
+            final String in = StdIn.readLine();
+            list.add(new Transaction(in));
+        }
+        final Transaction[] res = new Transaction[list.size()];
+        for (int i = 0; i < list.size(); ++i) {
+            res[i] = list.get(i);
+        }
+        return res;
     }
 
     @Override
