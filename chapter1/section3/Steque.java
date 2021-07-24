@@ -20,6 +20,7 @@ public class Steque<T> extends Queue<T> implements StackConv<T> {
             node.next = this.front;
             this.front = node;
         }
+        ++this.size;
     }
 
     @Override

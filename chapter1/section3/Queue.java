@@ -33,6 +33,7 @@ public class Queue<T> implements QueueConv<T> {
             this.last.next = node;
             this.last = node;
         }
+        ++this.size;
     }
 
     @Override
@@ -51,6 +52,7 @@ public class Queue<T> implements QueueConv<T> {
         } else {
             this.front = this.front.next;
         }
+        --this.size;
         return polled;
     }
 
@@ -64,7 +66,7 @@ public class Queue<T> implements QueueConv<T> {
             queue.offer(value);
             this.offer(value);
         }
-        this.size = queue.size;
+        this.size += queue.size;
     }
 
     @Override
