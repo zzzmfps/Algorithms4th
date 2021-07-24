@@ -1,19 +1,24 @@
 package chapter1.section3;
 
-public class GeneralizedQueueUsingLinkedList<T> {
+import convention.QueueConv;
+
+public class GeneralizedQueueUsingLinkedList<T> implements QueueConv<T> {
 
     private Node<T> first, last;
     private int size;
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
 
+    @Override
     public int size() {
         return this.size;
     }
 
-    public void insert(final T value) {
+    @Override
+    public void offer(final T value) {
         final Node<T> node = new Node<T>(value, null);
         if (this.isEmpty()) {
             this.first = this.last = node;
@@ -22,6 +27,16 @@ public class GeneralizedQueueUsingLinkedList<T> {
             this.last = node;
         }
         ++this.size;
+    }
+
+    @Override
+    public T peek() {
+        return this.first.value;
+    }
+
+    @Override
+    public T poll() {
+        return this.delete(0);
     }
 
     public T delete(final int k) {

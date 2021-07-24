@@ -2,7 +2,9 @@ package chapter1.section3;
 
 import java.util.Iterator;
 
-public class ResizingArrayDeque<T> implements Iterable<T> {
+import convention.DequeConv;
+
+public class ResizingArrayDeque<T> implements DequeConv<T>, Iterable<T> {
 
     private T[] array;
     private int begin, size;
@@ -12,26 +14,18 @@ public class ResizingArrayDeque<T> implements Iterable<T> {
         this.array = (T[]) new Object[Math.max(1, capacity)];
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
 
+    @Override
     public int size() {
         return this.size;
     }
 
-    public void pushLeft(final T value) {
-        if (this.size == this.array.length) {
-            this.resize(2 * this.array.length);
-        }
-        if (this.size > 0) {
-            this.begin = (this.begin + this.array.length - 1) % this.array.length;
-        }
-        ++this.size;
-        this.array[this.begin] = value;
-    }
-
-    public void pushRight(final T value) {
+    @Override
+    public void offerLast(final T value) {
         if (this.size == this.array.length) {
             this.resize(2 * this.array.length);
         }
@@ -43,7 +37,13 @@ public class ResizingArrayDeque<T> implements Iterable<T> {
         this.array[end] = value;
     }
 
-    public T popLeft() {
+    @Override
+    public T peekFirst() {
+        return this.array[this.begin];
+    }
+
+    @Override
+    public T pollFirst() {
         if (this.isEmpty()) {
             return null;
         }
@@ -57,7 +57,25 @@ public class ResizingArrayDeque<T> implements Iterable<T> {
         return value;
     }
 
-    public T popRight() {
+    @Override
+    public T peekLast() {
+        return this.array[(this.begin + this.size - 1) % this.array.length];
+    }
+
+    @Override
+    public void offerFirst(final T value) {
+        if (this.size == this.array.length) {
+            this.resize(2 * this.array.length);
+        }
+        if (this.size > 0) {
+            this.begin = (this.begin + this.array.length - 1) % this.array.length;
+        }
+        ++this.size;
+        this.array[this.begin] = value;
+    }
+
+    @Override
+    public T pollLast() {
         if (this.isEmpty()) {
             return null;
         }

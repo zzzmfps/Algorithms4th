@@ -2,7 +2,9 @@ package chapter1.section3;
 
 import java.util.Iterator;
 
-public class RandomBag<T> implements Iterable<T> {
+import convention.BagConv;
+
+public class RandomBag<T> implements BagConv<T> {
 
     private T[] array;
     private int size;
@@ -12,14 +14,18 @@ public class RandomBag<T> implements Iterable<T> {
         this.array = (T[]) new Object[Math.max(1, capacity)];
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
+
+    @Override
 
     public int size() {
         return this.size;
     }
 
+    @Override
     public void add(final T value) {
         if (this.size == this.array.length) {
             this.resize();

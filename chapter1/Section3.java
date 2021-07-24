@@ -143,19 +143,19 @@ public class Section3 {
 
     public static void exercise14() {
         final ResizingArrayQueueOfStrings<Integer> q = new ResizingArrayQueueOfStrings<>(2);
-        q.push(1);
-        q.push(2);
+        q.offer(1);
+        q.offer(2);
         q.resize(1);
         while (!q.isEmpty()) {
-            StdOut.println(q.pop());
+            StdOut.println(q.poll());
         }
         StdOut.println("***************");
-        q.push(1);
-        q.push(2); // will fail
+        q.offer(1);
+        q.offer(2); // will fail
         q.resize(2);
-        q.push(3);
+        q.offer(3);
         while (!q.isEmpty()) {
-            StdOut.println(q.pop());
+            StdOut.println(q.poll());
         }
     }
 
@@ -200,7 +200,7 @@ public class Section3 {
         list.add(1);
         list.add(2);
         list.add(3);
-        StdOut.println(list.delete(1));
+        StdOut.println(list.remove(1));
         StdOut.println(list);
     }
 
@@ -264,13 +264,13 @@ public class Section3 {
 
     public static void exercise29() {
         final LoopList<Integer> queue = new LoopList<>();
-        queue.push(1);
-        queue.pop();
-        queue.push(2);
-        queue.push(3);
-        queue.push(4);
-        queue.pop();
-        queue.push(5);
+        queue.add(1);
+        StdOut.println(queue.remove(queue.size() - 1));
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        StdOut.println(queue.remove(queue.size() - 1));
+        queue.add(5);
         StdOut.println(queue);
     }
 
@@ -297,32 +297,32 @@ public class Section3 {
         final Steque<Integer> steque = new Steque<>();
         steque.push(1);
         steque.push(2);
-        steque.enqueue(3);
-        steque.enqueue(4);
-        steque.pop();
+        steque.offer(3);
+        steque.offer(4);
+        steque.poll();
         StdOut.print(steque); // 1 3 4
     }
 
     public static void exercise33_1() { // double linked list
         final Deque<Integer> deque = new Deque<>();
-        deque.pushLeft(1);
-        deque.pushLeft(2);
-        deque.pushRight(3);
-        deque.pushRight(4);
-        deque.popRight();
-        deque.popLeft();
+        deque.offerFirst(1);
+        deque.offerFirst(2);
+        deque.offerLast(3);
+        deque.offerLast(4);
+        deque.pollLast();
+        deque.pollFirst();
         deque.forEach(v -> StdOut.println(v)); // 1 3
     }
 
     public static void exercise33_2() { // resizing array
         final ResizingArrayDeque<Integer> resizingArrayDeque = new ResizingArrayDeque<>(2);
-        resizingArrayDeque.pushLeft(1);
-        resizingArrayDeque.pushLeft(2);
-        resizingArrayDeque.pushRight(3);
-        resizingArrayDeque.pushRight(4);
-        resizingArrayDeque.pushRight(5);
-        resizingArrayDeque.popRight();
-        resizingArrayDeque.popLeft();
+        resizingArrayDeque.offerFirst(1);
+        resizingArrayDeque.offerFirst(2);
+        resizingArrayDeque.offerLast(3);
+        resizingArrayDeque.offerLast(4);
+        resizingArrayDeque.offerLast(5);
+        resizingArrayDeque.pollLast();
+        resizingArrayDeque.pollFirst();
         resizingArrayDeque.forEach(v -> StdOut.println(v)); // 1 3 4
     }
 
@@ -344,7 +344,7 @@ public class Section3 {
         final RandomQueue<Integer> queue = new RandomQueue<>(52);
         for (int i = 0; i < 4; ++i) {
             for (int j = 1; j <= 13; ++j) {
-                queue.enqueue(j);
+                queue.offer(j);
             }
         }
         StdOut.println("sample: " + queue.sample());
@@ -352,7 +352,7 @@ public class Section3 {
         final int[][] cards = new int[4][13];
         for (int i = 0; i < 13; ++i) {
             for (int j = 0; j < 4; ++j) {
-                cards[j][i] = queue.dequeue();
+                cards[j][i] = queue.poll();
             }
         }
         for (int i = 0; i < 4; ++i) {
@@ -367,7 +367,7 @@ public class Section3 {
     public static void exercise36() {
         final RandomQueue<Integer> queue = new RandomQueue<>(10);
         for (int i = 1; i <= 13; ++i) {
-            queue.enqueue(i);
+            queue.offer(i);
         }
         queue.forEach(v -> StdOut.print(v + " ")); // return and not dequeue
         StdOut.println();
@@ -378,34 +378,34 @@ public class Section3 {
     public static void exercise37(final int N, final int M) {
         final Queue<Integer> queue = new Queue<>();
         for (int i = 0; i < N; ++i) {
-            queue.enqueue(i);
+            queue.offer(i);
         }
         int count = 0;
         while (!queue.isEmpty()) {
-            final int x = queue.pop();
+            final int x = queue.poll();
             if (M == ++count) {
                 StdOut.print(x + " ");
                 count = 0;
             } else {
-                queue.enqueue(x);
+                queue.offer(x);
             }
         }
     }
 
     public static void exercise38_1() {
         GeneralizedQueueUsingArray<Integer> queue = new GeneralizedQueueUsingArray<>(2);
-        queue.insert(1);
-        queue.insert(3);
-        queue.insert(5);
+        queue.offer(1);
+        queue.offer(3);
+        queue.offer(5);
         queue.delete(2);
         StdOut.println(queue);
     }
 
     public static void exercise38_2() {
         GeneralizedQueueUsingLinkedList<Integer> queue = new GeneralizedQueueUsingLinkedList<>();
-        queue.insert(1);
-        queue.insert(3);
-        queue.insert(5);
+        queue.offer(1);
+        queue.offer(3);
+        queue.offer(5);
         queue.delete(2);
         StdOut.println(queue);
     }
@@ -461,11 +461,11 @@ public class Section3 {
 
     public static void exercise41() {
         final Queue<Integer> q1 = new Queue<>();
-        q1.enqueue(1);
-        q1.enqueue(2);
+        q1.offer(1);
+        q1.offer(2);
         final Queue<Integer> q2 = new Queue<>(q1);
-        q2.enqueue(3);
-        q2.pop();
+        q2.offer(3);
+        q2.poll();
         StdOut.println(q1);
         StdOut.println(q2);
     }
@@ -507,11 +507,11 @@ public class Section3 {
                 StdOut.println(prefix + file.getName());
                 __exercise43(file.getAbsolutePath(), level + 1);
             } else {
-                q.enqueue(file.getName());
+                q.offer(file.getName());
             }
         }
         while (!q.isEmpty()) {
-            StdOut.println(prefix + q.pop());
+            StdOut.println(prefix + q.poll());
         }
     }
 
@@ -567,12 +567,12 @@ public class Section3 {
 
     public static void exercise47() {
         Steque<Integer> sq1 = new Steque<>(); // or Queue, Stack
-        sq1.enqueue(1);
-        sq1.enqueue(2);
-        sq1.enqueue(3);
+        sq1.offer(1);
+        sq1.offer(2);
+        sq1.offer(3);
         Steque<Integer> sq2 = new Steque<>(sq1);
-        sq2.pop();
-        sq2.enqueue(4);
+        sq2.poll();
+        sq2.offer(4);
         sq2.catenation(sq1);
         StdOut.println(sq1);
         StdOut.println(sq2);
@@ -591,12 +591,12 @@ public class Section3 {
 
     public static void exercise49() { // amortized O(1)
         QueueUsingStacks<Integer> queue = new QueueUsingStacks<>();
-        queue.enqueue(1);
-        queue.enqueue(2);
-        queue.enqueue(3);
-        queue.dequeue();
-        queue.enqueue(4);
-        queue.enqueue(5);
+        queue.offer(1);
+        queue.offer(2);
+        queue.offer(3);
+        queue.poll();
+        queue.offer(4);
+        queue.offer(5);
         StdOut.println(queue); // [5, 4], [2, 3]
     }
 

@@ -1,32 +1,43 @@
 package chapter1.section3;
 
-public class FixedCapacityStackOfStrings {
+import convention.StackConv;
+
+public class FixedCapacityStackOfStrings implements StackConv<String> {
 
     private final String[] a;
     private int N;
 
     public FixedCapacityStackOfStrings(final int cap) {
-        a = new String[cap];
+        this.a = new String[cap];
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.N;
     }
 
     public boolean isFull() {
-        return a.length == N;
+        return this.a.length == this.N;
     }
 
+    @Override
     public int size() {
-        return N;
+        return this.N;
     }
 
+    @Override
     public void push(final String item) {
-        a[N++] = item;
+        this.a[this.N++] = item;
     }
 
+    @Override
+    public String peek() {
+        return this.a[this.N - 1];
+    }
+
+    @Override
     public String pop() {
-        return a[--N];
+        return this.a[--this.N];
     }
 
 }

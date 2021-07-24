@@ -2,9 +2,10 @@ package chapter1.section3;
 
 import java.util.Iterator;
 
+import convention.QueueConv;
 import edu.princeton.cs.algs4.StdRandom;
 
-public class RandomQueue<T> implements Iterable<T> {
+public class RandomQueue<T> implements QueueConv<T>, Iterable<T> {
 
     private T[] array;
     private int size;
@@ -14,18 +15,38 @@ public class RandomQueue<T> implements Iterable<T> {
         this.array = (T[]) new Object[Math.max(1, capacity)];
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
 
-    public void enqueue(final T value) {
+    @Override
+    public int size() {
+        return this.size;
+    }
+
+    @Override
+    public void offer(final T value) {
         if (this.size == this.array.length) {
             this.resize(2 * this.array.length);
         }
         this.array[this.size++] = value;
     }
 
-    public T dequeue() {
+    @Override
+    public T peek() {
+        return this.sample();
+    }
+
+    public T sample() {
+        if (this.isEmpty()) {
+            return null;
+        }
+        return this.array[StdRandom.uniform(this.size)];
+    }
+
+    @Override
+    public T poll() {
         if (this.isEmpty()) {
             return null;
         }
@@ -37,13 +58,6 @@ public class RandomQueue<T> implements Iterable<T> {
         this.array[index] = this.array[this.size - 1];
         this.array[--this.size] = null;
         return value;
-    }
-
-    public T sample() {
-        if (this.isEmpty()) {
-            return null;
-        }
-        return this.array[StdRandom.uniform(this.size)];
     }
 
     @SuppressWarnings("unchecked")

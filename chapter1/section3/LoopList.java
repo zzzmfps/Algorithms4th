@@ -1,14 +1,18 @@
 package chapter1.section3;
 
-public class LoopList<T> {
+import convention.ListConv;
+
+public class LoopList<T> implements ListConv<T> {
 
     private Node<T> last;
     private int N;
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.N;
     }
 
+    @Override
     public int size() {
         return this.N;
     }
@@ -24,7 +28,8 @@ public class LoopList<T> {
         return this.last;
     }
 
-    public void push(final T value) {
+    @Override
+    public void add(final T value) {
         final Node<T> node = new Node<T>(value, this.front());
         if (null == this.last) {
             this.last = node;
@@ -37,18 +42,36 @@ public class LoopList<T> {
         ++this.N;
     }
 
-    public T pop() {
-        if (0 == this.N) {
+    @Override
+    public T get(int index) {
+        if (index >= this.N) {
             return null;
         }
-        final T popped = front().value;
-        if (this.last == this.front()) {
+        Node<T> cur = this.last;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur.value;
+    }
+
+    @Override
+    public T remove(int index) {
+        if (index < 0 || index >= this.N) {
+            return null;
+        }
+        Node<T> prev = this.last;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+        T removed = prev.next.value;
+        if (1 == this.N) {
             this.last = null;
         } else {
-            this.last.next = this.front().next;
+            prev.next = prev.next.next;
+            this.last = prev;
         }
         --this.N;
-        return popped;
+        return removed;
     }
 
     @Override

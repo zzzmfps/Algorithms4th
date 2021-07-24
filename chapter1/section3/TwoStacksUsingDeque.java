@@ -19,10 +19,10 @@ public class TwoStacksUsingDeque<T> {
 
     public void push(final StackId id, final T value) {
         if (id == StackId.Stack1) {
-            deque.pushLeft(value);
+            deque.offerFirst(value);
             ++this.st1;
         } else {
-            deque.pushRight(value);
+            deque.offerLast(value);
             ++this.st2;
         }
     }
@@ -33,13 +33,13 @@ public class TwoStacksUsingDeque<T> {
                 return null;
             }
             --this.st1;
-            return deque.popLeft();
+            return deque.pollFirst();
         }
         if (0 == this.st2) {
             return null;
         }
         --this.st2;
-        return deque.popRight();
+        return deque.pollLast();
     }
 
     @Override
@@ -50,20 +50,20 @@ public class TwoStacksUsingDeque<T> {
         final Stack<T> tmp = new Stack<>();
         sb.append("\n\tStack1: ");
         for (int i = 0; i < this.st1; ++i) {
-            tmp.push(this.deque.popLeft());
+            tmp.push(this.deque.pollFirst());
             sb.append(" " + tmp.peek());
         }
         while (!tmp.isEmpty()) {
-            this.deque.pushLeft(tmp.pop());
+            this.deque.offerFirst(tmp.pop());
         }
 
         sb.append("\n\tStack2: ");
         for (int i = 0; i < this.st2; ++i) {
-            tmp.push(this.deque.popRight());
+            tmp.push(this.deque.pollLast());
             sb.append(" " + tmp.peek());
         }
         while (!tmp.isEmpty()) {
-            this.deque.pushRight(tmp.pop());
+            this.deque.offerLast(tmp.pop());
         }
 
         return sb.toString();

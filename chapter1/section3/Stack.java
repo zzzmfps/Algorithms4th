@@ -2,7 +2,9 @@ package chapter1.section3;
 
 import java.util.Iterator;
 
-public class Stack<T> implements Iterable<T> {
+import convention.StackConv;
+
+public class Stack<T> implements StackConv<T>, Iterable<T> {
 
     private Node<T> first;
     private int N;
@@ -15,20 +17,24 @@ public class Stack<T> implements Iterable<T> {
         this.catenation(stack);
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.N;
     }
 
+    @Override
     public int size() {
         return this.N;
     }
 
+    @Override
     public void push(final T value) {
         this.first = new Node<T>(value, this.first);
         ++this.N;
         ++this.counts[0];
     }
 
+    @Override
     public T peek() {
         if (this.isEmpty()) {
             return null;
@@ -36,6 +42,7 @@ public class Stack<T> implements Iterable<T> {
         return this.first.value;
     }
 
+    @Override
     public T pop() {
         if (this.isEmpty()) {
             return null;

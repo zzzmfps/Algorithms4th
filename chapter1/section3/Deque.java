@@ -3,22 +3,26 @@ package chapter1.section3;
 import java.util.Iterator;
 
 import chapter1.section3.DoubleList.DoubleNode;
+import convention.DequeConv;
 
-public class Deque<T> implements Iterable<T> {
+public class Deque<T> implements DequeConv<T>, Iterable<T> {
 
     private DoubleNode<T> head, tail;
     private int N;
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.N;
     }
 
+    @Override
     public int size() {
         return this.N;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public void pushLeft(final T value) {
+    public void offerFirst(final T value) {
         final DoubleNode<T> node = new DoubleNode<T>(value);
         if (0 == this.N++) {
             this.tail = this.head = node;
@@ -27,8 +31,9 @@ public class Deque<T> implements Iterable<T> {
         }
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public void pushRight(final T value) {
+    public void offerLast(final T value) {
         final DoubleNode<T> node = new DoubleNode<T>(value);
         if (0 == this.N++) {
             this.head = this.tail = node;
@@ -37,8 +42,19 @@ public class Deque<T> implements Iterable<T> {
         }
     }
 
+    @Override
+    public T peekFirst() {
+        return this.head.getValue();
+    }
+
+    @Override
+    public T peekLast() {
+        return this.tail.getValue();
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
-    public T popLeft() {
+    public T pollFirst() {
         if (0 == this.N) {
             return null;
         }
@@ -53,8 +69,9 @@ public class Deque<T> implements Iterable<T> {
         return left;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public T popRight() {
+    public T pollLast() {
         if (0 == this.N) {
             return null;
         }

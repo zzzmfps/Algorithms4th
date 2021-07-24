@@ -1,6 +1,8 @@
 package chapter1.section3;
 
-public class Steque<T> extends Queue<T> {
+import convention.StackConv;
+
+public class Steque<T> extends Queue<T> implements StackConv<T> {
 
     public Steque() {
     }
@@ -9,6 +11,7 @@ public class Steque<T> extends Queue<T> {
         super(sq);
     }
 
+    @Override
     public void push(final T value) {
         final Node<T> node = new Node<T>(value, null);
         if (null == this.front) {
@@ -17,6 +20,11 @@ public class Steque<T> extends Queue<T> {
             node.next = this.front;
             this.front = node;
         }
+    }
+
+    @Override
+    public T pop() {
+        return this.poll();
     }
 
     @Override

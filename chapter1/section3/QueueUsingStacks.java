@@ -1,18 +1,28 @@
 package chapter1.section3;
 
-public class QueueUsingStacks<T> {
+import convention.QueueConv;
+
+public class QueueUsingStacks<T> implements QueueConv<T> {
 
     private final Stack<T> in = new Stack<>();
     private final Stack<T> out = new Stack<>();
 
+    @Override
     public boolean isEmpty() {
         return this.in.isEmpty() && this.out.isEmpty();
     }
 
+    @Override
     public int size() {
         return this.in.size() + this.out.size();
     }
 
+    @Override
+    public void offer(final T value) {
+        this.in.push(value);
+    }
+
+    @Override
     public T peek() {
         if (this.isEmpty()) {
             return null;
@@ -26,11 +36,8 @@ public class QueueUsingStacks<T> {
         return this.out.peek();
     }
 
-    public void enqueue(final T value) {
-        this.in.push(value);
-    }
-
-    public T dequeue() {
+    @Override
+    public T poll() {
         if (null == this.peek()) {
             return null;
         }

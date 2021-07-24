@@ -1,14 +1,18 @@
 package chapter1.section3;
 
-public class List<T> {
+import convention.ListConv;
+
+public class List<T> implements ListConv<T> {
 
     private Node<T> first, last;
     private int N;
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.N;
     }
 
+    @Override
     public int size() {
         return this.N;
     }
@@ -21,6 +25,7 @@ public class List<T> {
         return this.last;
     }
 
+    @Override
     public void add(final T value) {
         final Node<T> added = new Node<T>(value, null);
         if (0 == this.N) {
@@ -30,6 +35,53 @@ public class List<T> {
             this.last = this.last.next;
         }
         ++this.N;
+    }
+
+    @Override
+    public T get(final int index) {
+        if (index < 0 || index >= this.N) {
+            return null;
+        }
+        Node<T> res = this.first;
+        for (int i = 0; i < index; ++i) {
+            res = res.next;
+        }
+        return res.value;
+    }
+
+    @Override
+    public T remove(final int k) { // indexed from 0
+        if (0 == k) {
+            return this.deleteHead();
+        }
+        if (this.N - 1 == k) {
+            return this.deleteTail();
+        }
+        if (k < 0 || k > this.N - 1) {
+            return null;
+        }
+        Node<T> cur = this.first;
+        for (int i = 1; i < k; ++i) {
+            cur = cur.next;
+        }
+        final T deleted = cur.next.value;
+        cur.next = cur.next.next;
+        --this.N;
+        return deleted;
+    }
+
+    public int remove(final T value) {
+        int count = 0;
+        Node<T> prev = new Node<T>(null, this.first);
+        while (null != prev.next) {
+            if (prev.next.value != value) {
+                prev = prev.next;
+                continue;
+            }
+            this.removeAfter(prev);
+            ++count;
+        }
+        return count;
     }
 
     public T deleteHead() {
@@ -61,26 +113,6 @@ public class List<T> {
             cur.next = null;
             this.last = cur;
         }
-        --this.N;
-        return deleted;
-    }
-
-    public T delete(final int k) { // indexed from 0
-        if (0 == k) {
-            return this.deleteHead();
-        }
-        if (this.N - 1 == k) {
-            return this.deleteTail();
-        }
-        if (k < 0 || k > this.N - 1) {
-            return null;
-        }
-        Node<T> cur = this.first;
-        for (int i = 1; i < k; ++i) {
-            cur = cur.next;
-        }
-        final T deleted = cur.next.value;
-        cur.next = cur.next.next;
         --this.N;
         return deleted;
     }
@@ -120,20 +152,6 @@ public class List<T> {
         newNode.next = node.next;
         node.next = newNode;
         ++this.N;
-    }
-
-    public int remove(final T value) {
-        int count = 0;
-        Node<T> prev = new Node<T>(null, this.first);
-        while (null != prev.next) {
-            if (prev.next.value != value) {
-                prev = prev.next;
-                continue;
-            }
-            this.removeAfter(prev);
-            ++count;
-        }
-        return count;
     }
 
     public static int max(Node<Integer> node) {

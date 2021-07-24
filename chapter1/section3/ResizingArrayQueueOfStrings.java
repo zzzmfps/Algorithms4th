@@ -1,6 +1,8 @@
 package chapter1.section3;
 
-public class ResizingArrayQueueOfStrings<T> {
+import convention.QueueConv;
+
+public class ResizingArrayQueueOfStrings<T> implements QueueConv<T> {
 
     private int begin, size;
     private int capacity;
@@ -12,24 +14,32 @@ public class ResizingArrayQueueOfStrings<T> {
         this.capacity = cap;
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
 
+    @Override
     public int size() {
         return this.size;
     }
 
-    public boolean push(final T value) {
+    @Override
+    public void offer(final T value) {
         if (this.capacity == this.size) {
-            return false;
+            return;
         }
         this.array[(this.begin + this.size) % this.capacity] = value;
         ++this.size;
-        return true;
     }
 
-    public T pop() {
+    @Override
+    public T peek() {
+        return this.array[this.begin];
+    }
+
+    @Override
+    public T poll() {
         if (this.isEmpty()) {
             return null;
         }

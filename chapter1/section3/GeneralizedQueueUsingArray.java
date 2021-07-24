@@ -2,7 +2,9 @@ package chapter1.section3;
 
 import java.util.Arrays;
 
-public class GeneralizedQueueUsingArray<T> {
+import convention.QueueConv;
+
+public class GeneralizedQueueUsingArray<T> implements QueueConv<T> {
 
     private T[] array;
     private int size;
@@ -12,19 +14,32 @@ public class GeneralizedQueueUsingArray<T> {
         this.array = (T[]) new Object[cap];
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
 
+    @Override
     public int size() {
         return this.size;
     }
 
-    public void insert(final T value) {
+    @Override
+    public void offer(final T value) {
         if (this.size == this.array.length) {
             this.resize(2 * this.array.length);
         }
         this.array[this.size++] = value;
+    }
+
+    @Override
+    public T peek() {
+        return this.array[0];
+    }
+
+    @Override
+    public T poll() {
+        return this.delete(0);
     }
 
     public T delete(final int k) {
