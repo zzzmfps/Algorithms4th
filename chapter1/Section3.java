@@ -299,8 +299,9 @@ public class Section3 {
         steque.push(2);
         steque.offer(3);
         steque.offer(4);
+        steque.pop();
         steque.poll();
-        StdOut.print(steque); // 1 3 4
+        StdOut.print(steque); // 2 3
     }
 
     public static void exercise33_1() { // double linked list
@@ -566,16 +567,16 @@ public class Section3 {
     }
 
     public static void exercise47() {
-        Steque<Integer> sq1 = new Steque<>(); // or Queue, Stack
-        sq1.offer(1);
-        sq1.offer(2);
-        sq1.offer(3);
-        Steque<Integer> sq2 = new Steque<>(sq1);
-        sq2.poll();
-        sq2.offer(4);
-        sq2.catenation(sq1);
-        StdOut.println(sq1);
-        StdOut.println(sq2);
+        Queue<Integer> q1 = new Queue<>(); // or Queue, Stack
+        q1.offer(1);
+        q1.offer(2);
+        q1.offer(3);
+        Queue<Integer> q2 = new Queue<>(q1);
+        q2.poll();
+        q2.offer(4);
+        q2.catenation(q1);
+        StdOut.println(q1); // 1 2 3
+        StdOut.println(q2); // 2 3 4 1 2 3
     }
 
     public static void exercise48() {
@@ -614,6 +615,9 @@ public class Section3 {
     }
 
     public static void main(final String[] args) {
+        exercise32();
+        System.err.println("****************");
+        exercise47();
     }
 
 }
