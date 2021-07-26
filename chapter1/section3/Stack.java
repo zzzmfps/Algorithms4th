@@ -8,7 +8,7 @@ public class Stack<T> implements StackConv<T>, Iterable<T> {
 
     private Node<T> first;
     private int N;
-    private final int[] counts = new int[2];
+    private final int[] counts = new int[2]; // fail-fast
 
     public Stack() {
     }
@@ -25,6 +25,13 @@ public class Stack<T> implements StackConv<T>, Iterable<T> {
     @Override
     public int size() {
         return this.N;
+    }
+
+    @Override
+    public void clear() {
+        this.first = null;
+        this.N = 0;
+        this.counts[0] = this.counts[1] = -1;
     }
 
     @Override

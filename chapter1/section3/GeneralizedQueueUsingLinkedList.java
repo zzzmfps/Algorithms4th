@@ -18,6 +18,12 @@ public class GeneralizedQueueUsingLinkedList<T> implements QueueConv<T> {
     }
 
     @Override
+    public void clear() {
+        this.first = this.last = null;
+        this.size = 0;
+    }
+
+    @Override
     public void offer(final T value) {
         final Node<T> node = new Node<T>(value, null);
         if (this.isEmpty()) {

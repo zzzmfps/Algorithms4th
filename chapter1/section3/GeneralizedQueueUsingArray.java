@@ -25,6 +25,14 @@ public class GeneralizedQueueUsingArray<T> implements QueueConv<T> {
     }
 
     @Override
+    public void clear() {
+        for (int i = 0; i < this.size; ++i) {
+            this.array[i] = null;
+        }
+        this.size = 0;
+    }
+
+    @Override
     public void offer(final T value) {
         if (this.size == this.array.length) {
             this.resize(2 * this.array.length);

@@ -1,9 +1,27 @@
 package chapter1.section3;
 
-public class Buffer {
+import convention.ContainerConv;
+
+public class Buffer implements ContainerConv<Character> {
 
     Stack<Character> prev = new Stack<>();
     Stack<Character> next = new Stack<>();
+
+    @Override
+    public boolean isEmpty() {
+        return this.prev.isEmpty() && this.next.isEmpty();
+    }
+
+    @Override
+    public int size() {
+        return this.prev.size() + this.next.size();
+    }
+
+    @Override
+    public void clear() {
+        this.prev.clear();
+        this.next.clear();
+    }
 
     public void insert(final char c) {
         this.prev.push(c);
@@ -25,10 +43,6 @@ public class Buffer {
             this.prev.push(this.next.pop());
             --k;
         }
-    }
-
-    public int size() {
-        return this.prev.size() + this.next.size();
     }
 
 }

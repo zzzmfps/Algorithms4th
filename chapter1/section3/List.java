@@ -17,6 +17,12 @@ public class List<T> implements ListConv<T> {
         return this.N;
     }
 
+    @Override
+    public void clear() {
+        this.first = this.last = null;
+        this.N = 0;
+    }
+
     public Node<T> first() {
         return this.first;
     }

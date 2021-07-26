@@ -1,10 +1,6 @@
 package convention;
 
-public interface BagConv<T> extends Iterable<T> {
-
-    public boolean isEmpty();
-
-    public int size();
+public interface BagConv<T> extends ContainerConv<T>, Iterable<T> {
 
     public void add(T value);
 

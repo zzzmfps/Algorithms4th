@@ -25,6 +25,12 @@ public class Queue<T> implements QueueConv<T> {
     }
 
     @Override
+    public void clear() {
+        this.front = this.last = null;
+        this.size = 0;
+    }
+
+    @Override
     public void offer(final T value) {
         final Node<T> node = new Node<T>(value, null);
         if (null == this.last) {

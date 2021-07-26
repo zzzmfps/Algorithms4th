@@ -17,6 +17,12 @@ public class LoopList<T> implements ListConv<T> {
         return this.N;
     }
 
+    @Override
+    public void clear() {
+        this.last = null;
+        this.N = 0;
+    }
+
     public Node<T> front() {
         if (null == this.last) {
             return null;

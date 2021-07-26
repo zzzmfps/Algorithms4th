@@ -21,6 +21,12 @@ public class Deque<T> implements DequeConv<T>, Iterable<T> {
     }
 
     @Override
+    public void clear() {
+        this.head = this.tail = null;
+        this.N = 0;
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public void offerFirst(final T value) {
         final DoubleNode<T> node = new DoubleNode<T>(value);

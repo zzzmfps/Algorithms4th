@@ -25,6 +25,14 @@ public class ResizingArrayQueueOfStrings<T> implements QueueConv<T> {
     }
 
     @Override
+    public void clear() {
+        for (int i = 0; i < this.size; ++i) {
+            this.array[(i + this.begin) % this.array.length] = null;
+        }
+        this.begin = this.size = 0;
+    }
+
+    @Override
     public void offer(final T value) {
         if (this.capacity == this.size) {
             return;

@@ -26,6 +26,14 @@ public class FixedCapacityStackOfStrings implements StackConv<String> {
     }
 
     @Override
+    public void clear() {
+        for (int i = 0; i < this.N; ++i) {
+            this.a[i] = null;
+        }
+        this.N = 0;
+    }
+
+    @Override
     public void push(final String item) {
         this.a[this.N++] = item;
     }

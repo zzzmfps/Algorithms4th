@@ -1,10 +1,6 @@
 package convention;
 
-public interface DequeConv<T> {
-
-    public boolean isEmpty();
-
-    public int size();
+public interface DequeConv<T> extends ContainerConv<T> {
 
     public void offerFirst(T value);
 

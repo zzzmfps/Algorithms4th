@@ -1,10 +1,6 @@
 package convention;
 
-public interface StackConv<T> {
-
-    public boolean isEmpty();
-
-    public int size();
+public interface StackConv<T> extends ContainerConv<T> {
 
     public void push(T value);
 

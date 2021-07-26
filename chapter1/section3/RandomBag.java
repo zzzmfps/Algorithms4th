@@ -20,9 +20,16 @@ public class RandomBag<T> implements BagConv<T> {
     }
 
     @Override
-
     public int size() {
         return this.size;
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i < this.size; ++i) {
+            this.array[i] = null;
+        }
+        this.size = 0;
     }
 
     @Override

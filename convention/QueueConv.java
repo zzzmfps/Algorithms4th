@@ -1,10 +1,6 @@
 package convention;
 
-public interface QueueConv<T> {
-
-    public boolean isEmpty();
-
-    public int size();
+public interface QueueConv<T> extends ContainerConv<T> {
 
     public void offer(T value);
 

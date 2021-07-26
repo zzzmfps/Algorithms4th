@@ -1,23 +1,37 @@
 package chapter1.section3;
 
-public class RingBuffer<T> {
+import convention.ContainerConv;
+
+public class RingBuffer<T> implements ContainerConv<T> {
 
     private final T[] buffer;
     private int head, size;
-    private final int N;
 
     @SuppressWarnings("unchecked")
     public RingBuffer(final int n) {
         this.buffer = (T[]) new Object[n];
-        this.N = n;
     }
 
+    @Override
     public boolean isEmpty() {
         return 0 == this.size;
     }
 
     public boolean isFull() {
-        return this.N == this.size;
+        return this.buffer.length == this.size;
+    }
+
+    @Override
+    public int size() {
+        return this.size;
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i < size; ++i) {
+            this.buffer[(i + this.head) % this.buffer.length] = null;
+        }
+        this.size = 0;
     }
 
     public T consume() {

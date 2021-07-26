@@ -1,16 +1,40 @@
 package chapter1.section3;
 
-public class Steque<T> {
+import convention.ContainerConv;
+
+public class Steque<T> implements ContainerConv<T> {
 
     protected Node<T> front, last;
     protected int size;
 
+    @Override
     public boolean isEmpty() {
         return null == this.front;
     }
 
+    @Override
     public int size() {
         return this.size;
+    }
+
+    @Override
+    public void clear() {
+        this.front = this.last = null;
+        this.size = 0;
+    }
+
+    public T front() {
+        if (null == this.front) {
+            return null;
+        }
+        return this.front.value;
+    }
+
+    public T last() {
+        if (null == this.last) {
+            return null;
+        }
+        return this.last.value;
     }
 
     public void push(final T value) {

@@ -18,6 +18,12 @@ public class QueueUsingStacks<T> implements QueueConv<T> {
     }
 
     @Override
+    public void clear() {
+        this.in.clear();
+        this.out.clear();
+    }
+
+    @Override
     public void offer(final T value) {
         this.in.push(value);
     }
