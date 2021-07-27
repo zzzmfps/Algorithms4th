@@ -233,8 +233,59 @@ public class Section4 {
         return (i == j ? -1 : (-1 == i) ? j : i);
     }
 
-    public static void exercise19(int[][] matrix) {
-        // TODO
+    public static void exercise19(int[][] matrix) { // called 'roll downhill', ~n
+        int res = __exercise19_1(matrix, 1, matrix[0].length - 1, 1, matrix.length - 1);
+        if (Integer.MAX_VALUE == res) {
+            StdOut.println("not exist");
+        } else {
+            StdOut.println(res);
+        }
+    }
+
+    private static int __exercise19_1(int[][] matrix, int l, int r, int u, int b) { // min of row
+        if (l >= r || u >= b) {
+            return Integer.MAX_VALUE;
+        }
+        int min = Integer.MAX_VALUE, minCol = -1;
+        int row = u + (b - u) / 2;
+        for (int i = l; i < r; ++i) {
+            if (min > matrix[row][i]) {
+                min = matrix[row][i];
+                minCol = i;
+            }
+        }
+        int possible = matrix[row][minCol];
+        if (possible < matrix[row - 1][minCol] && possible < matrix[row + 1][minCol]) {
+            StdOut.printf("(%d, %d) = ", row, minCol);
+            return possible;
+        }
+        if (possible > matrix[row - 1][minCol]) {
+            return __exercise19_2(matrix, l, r, u, row);
+        }
+        return __exercise19_2(matrix, l, r, row + 1, b);
+    }
+
+    private static int __exercise19_2(int[][] matrix, int l, int r, int u, int b) { // min of col
+        if (l >= r || u >= b) {
+            return Integer.MAX_VALUE;
+        }
+        int min = Integer.MAX_VALUE, minRow = -1;
+        int col = l + (r - l) / 2;
+        for (int i = u; i < b; ++i) {
+            if (min > matrix[i][col]) {
+                min = matrix[i][col];
+                minRow = i;
+            }
+        }
+        int possible = matrix[minRow][col];
+        if (possible < matrix[minRow][col - 1] && possible < matrix[minRow][col + 1]) {
+            StdOut.printf("(%d, %d) = ", minRow, col);
+            return possible;
+        }
+        if (possible > matrix[minRow][col - 1]) {
+            return __exercise19_1(matrix, l, col, u, b);
+        }
+        return __exercise19_1(matrix, col + 1, r, u, b);
     }
 
     public static void exercise20(int[] array, int target) {
