@@ -615,9 +615,6 @@ public class Section3 {
     }
 
     public static void main(final String[] args) {
-        exercise32();
-        System.err.println("****************");
-        exercise47();
     }
 
 }
