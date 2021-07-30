@@ -558,7 +558,7 @@ public class Section3 {
                 stack.push(ops[i]);
                 continue;
             }
-            if (!target[j++].equals(stack.pop())) {
+            if (!target[++j].equals(stack.pop())) {
                 StdOut.println("no");
                 return;
             }

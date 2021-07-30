@@ -56,7 +56,7 @@ public class Section4 {
     private static long __exercise3_1(int N) {
         int max = 1000000;
         int[] a = new int[N];
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; ++i) {
             a[i] = StdRandom.uniform(-max, max);
         }
         long t1 = System.currentTimeMillis();
@@ -129,9 +129,9 @@ public class Section4 {
     public static void exercise14(int[] array, int target) {
         int count = 0;
         Arrays.sort(array);
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                for (int k = j + 1; k < array.length; k++) {
+        for (int i = 0; i < array.length; ++i) {
+            for (int j = i + 1; j < array.length; ++j) {
+                for (int k = j + 1; k < array.length; ++k) {
                     int value = Long.valueOf((long) target - array[i] - array[j] - array[k]).intValue();
                     int index = StaticSetOfInts.rangedIndexOf(array, value, k + 1, array.length);
                     if (-1 != index) {
@@ -448,7 +448,7 @@ public class Section4 {
 
     public static void exercise38(int round) {
         int[] nums = new int[1000];
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; ++i) {
             nums[i] = StdRandom.uniform(-100, 100);
         }
         long t1 = System.currentTimeMillis();

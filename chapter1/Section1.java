@@ -313,7 +313,7 @@ public class Section1 {
                 arr[j] = j;
             }
             __exercise36(arr);
-            for (int j = 0; j < M; j++) {
+            for (int j = 0; j < M; ++j) {
                 ++counts[arr[j]][j];
             }
         }
@@ -343,7 +343,7 @@ public class Section1 {
                 arr[j] = j;
             }
             __exercise37(arr);
-            for (int j = 0; j < M; j++) {
+            for (int j = 0; j < M; ++j) {
                 ++counts[arr[j]][j];
             }
         }

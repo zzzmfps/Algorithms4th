@@ -54,7 +54,7 @@ public class LoopList<T> implements ListConv<T> {
             return null;
         }
         Node<T> cur = this.last;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index; ++i) {
             cur = cur.next;
         }
         return cur.value;
@@ -66,7 +66,7 @@ public class LoopList<T> implements ListConv<T> {
             return null;
         }
         Node<T> prev = this.last;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index; ++i) {
             prev = prev.next;
         }
         T removed = prev.next.value;
