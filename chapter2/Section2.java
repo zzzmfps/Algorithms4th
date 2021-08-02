@@ -75,7 +75,7 @@ public class Section2 {
         for (int i : index) {
             StdOut.print(i + " ");
         }
-        StdOut.println("Cooresponding:");
+        StdOut.println("Corresponding:");
         for (int i : index) {
             StdOut.print(array[i] + " ");
         }
