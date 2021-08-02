@@ -41,7 +41,7 @@ public class Shell extends SortAbstract {
             }
             Shell.normal = false;
         } else {
-            int i = 0, j = 2;
+            int i = 1, j = 2;
             while (true) {
                 int h1 = Double.valueOf(9 * Math.pow(4, i) - 9 * Math.pow(2, i) + 1).intValue();
                 int h2 = Double.valueOf(Math.pow(4, j) - 3 * Math.pow(2, j) + 1).intValue();

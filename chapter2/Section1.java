@@ -12,7 +12,7 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class Section1 {
 
-    private static Character[] toCharacterArray(String str) {
+    public static Character[] toCharacterArray(String str) {
         Character[] res = new Character[str.length()];
         for (int i = 0; i < str.length(); ++i) {
             res[i] = str.charAt(i);
