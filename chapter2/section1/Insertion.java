@@ -1,8 +1,8 @@
 package chapter2.section1;
 
-import convention.SortAbstract;
+import convention.base.AbstractSort;
 
-public class Insertion extends SortAbstract {
+public class Insertion extends AbstractSort {
 
     public static void sort(int[] array) {
         Insertion.sort(array, 0, array.length);
@@ -23,24 +23,24 @@ public class Insertion extends SortAbstract {
     }
 
     public static <T extends Comparable<T>> void sort(T[] array, int begin, int end) {
-        SortAbstract.exch(array, begin, Insertion.minIndex(array, begin, end)); // sentinel
+        AbstractSort.exch(array, begin, Insertion.minIndex(array, begin, end)); // sentinel
         for (int i = begin + 1, j; i < end; ++i) {
             T value = array[i];
-            for (j = i; SortAbstract.less(value, array[j - 1]); j -= 1) {
+            for (j = i; AbstractSort.less(value, array[j - 1]); j -= 1) {
                 array[j] = array[j - 1]; // no exch
             }
             array[j] = value;
-            if (SortAbstract.detail) {
-                SortAbstract.show(array);
+            if (AbstractSort.detail) {
+                AbstractSort.show(array);
             }
         }
-        SortAbstract.detail = false;
+        AbstractSort.detail = false;
     }
 
     private static <T extends Comparable<T>> int minIndex(T[] array, int begin, int end) {
         int index = begin;
         for (int i = begin + 1; i < end; ++i) {
-            if (SortAbstract.less(array[i], array[index])) {
+            if (AbstractSort.less(array[i], array[index])) {
                 index = i;
             }
         }

@@ -2,13 +2,13 @@ package chapter2.section2;
 
 import java.util.Arrays;
 
-import convention.SortAbstract;
+import convention.base.AbstractSort;
 
-public class Merge extends SortAbstract {
+public class Merge extends AbstractSort {
 
     public static <T extends Comparable<T>> void sort(T[] array) {
         Merge.sort(array, 0, array.length - 1);
-        SortAbstract.detail = false;
+        AbstractSort.detail = false;
     }
 
     private static <T extends Comparable<T>> void sort(T[] array, int l, int r) {
@@ -16,7 +16,7 @@ public class Merge extends SortAbstract {
             int mid = l + (r - l) / 2;
             Merge.sort(array, l, mid);
             Merge.sort(array, mid + 1, r);
-            if (SortAbstract.less(array[mid + 1], array[mid])) {
+            if (AbstractSort.less(array[mid + 1], array[mid])) {
                 Merge.merge(array, l, mid, r);
             }
         }
@@ -24,14 +24,14 @@ public class Merge extends SortAbstract {
 
     public static <T extends Comparable<T>> void sortBU(T[] array) {
         Merge.sortBU(array, 0, array.length - 1);
-        SortAbstract.detail = false;
+        AbstractSort.detail = false;
     }
 
     private static <T extends Comparable<T>> void sortBU(T[] array, int l, int r) {
         int N = array.length;
         for (int i = 1; i < N; i <<= 1) {
             for (int j = 0; j < N - i; j += 2 * i) {
-                if (SortAbstract.less(array[j + i], array[j + i - 1])) {
+                if (AbstractSort.less(array[j + i], array[j + i - 1])) {
                     Merge.merge(array, j, j + i - 1, Math.min(j + 2 * i, N) - 1);
                 }
             }
@@ -40,7 +40,7 @@ public class Merge extends SortAbstract {
 
     public static <T extends Comparable<T>> void sortNatural(T[] array) {
         Merge.sortNatural(array, 0, array.length - 1);
-        SortAbstract.detail = false;
+        AbstractSort.detail = false;
     }
 
     private static <T extends Comparable<T>> void sortNatural(T[] array, int l, int r) {
@@ -58,7 +58,7 @@ public class Merge extends SortAbstract {
 
     private static <T extends Comparable<T>> int findFirstReverse(T[] array, int begin, int end) {
         while (++begin <= end) {
-            if (SortAbstract.less(array[begin], array[begin - 1])) {
+            if (AbstractSort.less(array[begin], array[begin - 1])) {
                 break;
             }
         }
@@ -73,14 +73,14 @@ public class Merge extends SortAbstract {
                 array[k] = array[j++];
             } else if (j > r) {
                 array[k] = aux[i++];
-            } else if (SortAbstract.less(aux[i], array[j])) {
+            } else if (AbstractSort.less(aux[i], array[j])) {
                 array[k] = aux[i++];
             } else {
                 array[k] = array[j++];
             }
         }
-        if (SortAbstract.detail) {
-            SortAbstract.show(array);
+        if (AbstractSort.detail) {
+            AbstractSort.show(array);
         }
     }
 
@@ -96,7 +96,7 @@ public class Merge extends SortAbstract {
         }
         for (int i = 1; i < N; i <<= 1) {
             for (int j = 0; j < N - i; j += 2 * i) {
-                if (SortAbstract.less(array[index[j + i]], array[index[j + i - 1]])) {
+                if (AbstractSort.less(array[index[j + i]], array[index[j + i - 1]])) {
                     Merge.merge(array, index, j, j + i - 1, Math.min(j + 2 * i, N) - 1);
                 }
             }
@@ -112,7 +112,7 @@ public class Merge extends SortAbstract {
                 index[k] = index[j++];
             } else if (j > r) {
                 index[k] = aux[i++];
-            } else if (SortAbstract.less(array[aux[i]], array[index[j]])) {
+            } else if (AbstractSort.less(array[aux[i]], array[index[j]])) {
                 index[k] = aux[i++];
             } else {
                 index[k] = index[j++];
@@ -128,7 +128,7 @@ public class Merge extends SortAbstract {
         int N = array.length, count = 0;
         for (int i = 1; i < N; i <<= 1) {
             for (int j = 0; j < N - i; j += 2 * i) {
-                if (SortAbstract.less(array[j + i], array[j + i - 1])) {
+                if (AbstractSort.less(array[j + i], array[j + i - 1])) {
                     count += Merge.mergeAndCount(array, j, j + i - 1, Math.min(j + 2 * i, N) - 1);
                 }
             }
@@ -144,7 +144,7 @@ public class Merge extends SortAbstract {
                 array[k] = array[j++];
             } else if (j > r) {
                 array[k] = aux[i++];
-            } else if (SortAbstract.less(array[j], aux[i])) {
+            } else if (AbstractSort.less(array[j], aux[i])) {
                 count += mid - (i + l) + 1; // less than unsorted elements in [i+l, mid]
                 array[k] = array[j++];
             } else {

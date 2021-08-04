@@ -1,10 +1,10 @@
 package chapter2.section1;
 
 import chapter1.section3.List;
-import convention.SortAbstract;
+import convention.base.AbstractSort;
 import edu.princeton.cs.algs4.StdOut;
 
-public class Shell extends SortAbstract {
+public class Shell extends AbstractSort {
 
     private static boolean normal;
 
@@ -17,19 +17,19 @@ public class Shell extends SortAbstract {
         int[] hs = Shell.generator(N);
         for (int i = hs.length - 1; i > -1; --i) {
             int h = hs[i];
-            if (SortAbstract.detail) {
+            if (AbstractSort.detail) {
                 StdOut.printf("h = %d\n", h);
             }
             for (int j = h; j < N; ++j) {
-                for (int k = j; k >= h && SortAbstract.less(array[k], array[k - h]); k -= h) {
-                    SortAbstract.exch(array, k, k - h);
+                for (int k = j; k >= h && AbstractSort.less(array[k], array[k - h]); k -= h) {
+                    AbstractSort.exch(array, k, k - h);
                 }
-                if (SortAbstract.detail) {
-                    SortAbstract.show(array);
+                if (AbstractSort.detail) {
+                    AbstractSort.show(array);
                 }
             }
         }
-        SortAbstract.detail = false;
+        AbstractSort.detail = false;
     }
 
     private static int[] generator(int limit) {

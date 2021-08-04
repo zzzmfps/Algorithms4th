@@ -1,24 +1,24 @@
 package chapter2.section1;
 
-import convention.SortAbstract;
+import convention.base.AbstractSort;
 
-public class Selection extends SortAbstract {
+public class Selection extends AbstractSort {
 
     public static <T extends Comparable<T>> void sort(T[] array) {
         int N = array.length;
         for (int i = 0; i < N; ++i) {
             int min = i;
             for (int j = i + 1; j < N; ++j) {
-                if (SortAbstract.less(array[j], array[min])) {
+                if (AbstractSort.less(array[j], array[min])) {
                     min = j;
                 }
             }
-            SortAbstract.exch(array, i, min);
-            if (SortAbstract.detail) {
-                SortAbstract.show(array);
+            AbstractSort.exch(array, i, min);
+            if (AbstractSort.detail) {
+                AbstractSort.show(array);
             }
         }
-        SortAbstract.detail = false;
+        AbstractSort.detail = false;
     }
 
 }

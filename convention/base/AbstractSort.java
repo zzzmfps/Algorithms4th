@@ -1,9 +1,9 @@
-package convention;
+package convention.base;
 
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
-public abstract class SortAbstract {
+public abstract class AbstractSort {
 
     protected static boolean detail;
 
@@ -11,13 +11,13 @@ public abstract class SortAbstract {
     private static int delay = 1000;
 
     public static void requireDetails(boolean useAnimation) {
-        SortAbstract.detail = true;
-        SortAbstract.animation = useAnimation;
+        AbstractSort.detail = true;
+        AbstractSort.animation = useAnimation;
     }
 
     public static <T extends Comparable<T>> boolean isSorted(T[] array) {
         for (int i = 1; i < array.length; ++i) {
-            if (SortAbstract.less(array[i], array[i - 1])) {
+            if (AbstractSort.less(array[i], array[i - 1])) {
                 return false;
             }
         }
@@ -25,9 +25,9 @@ public abstract class SortAbstract {
     }
 
     protected static <T extends Comparable<T>> void show(T[] array) {
-        if (SortAbstract.animation && Number.class.isInstance(array[0])) {
+        if (AbstractSort.animation && Number.class.isInstance(array[0])) {
             StdDraw.setXscale(-1.0, Integer.valueOf(array.length).doubleValue());
-            StdDraw.setYscale(-1.0, 1.1 * ((Number) SortAbstract.max(array)).doubleValue());
+            StdDraw.setYscale(-1.0, 1.1 * ((Number) AbstractSort.max(array)).doubleValue());
             StdDraw.setPenRadius(0.02);
             StdDraw.clear();
             for (int i = 0; i < array.length; ++i) {
@@ -37,7 +37,7 @@ public abstract class SortAbstract {
             StdDraw.setYscale();
             StdDraw.setXscale();
             try {
-                Thread.sleep(SortAbstract.delay);
+                Thread.sleep(AbstractSort.delay);
             } catch (InterruptedException e) {
             }
             return;
@@ -50,7 +50,7 @@ public abstract class SortAbstract {
     private static <T extends Comparable<T>> T max(T[] array) {
         T max = array[0];
         for (int i = 1; i < array.length; ++i) {
-            if (SortAbstract.less(max, array[i])) {
+            if (AbstractSort.less(max, array[i])) {
                 max = array[i];
             }
         }
