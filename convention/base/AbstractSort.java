@@ -5,6 +5,10 @@ import edu.princeton.cs.algs4.StdOut;
 
 public abstract class AbstractSort {
 
+    public static enum Mode {
+        Less, Greater
+    }
+
     protected static boolean detail;
 
     private static boolean animation;
@@ -59,6 +63,10 @@ public abstract class AbstractSort {
 
     protected static <T extends Comparable<T>> boolean less(T x, T y) {
         return x.compareTo(y) < 0;
+    }
+
+    protected static <T extends Comparable<T>> boolean greater(T x, T y) {
+        return x.compareTo(y) > 0;
     }
 
     protected static <T extends Comparable<T>> void exch(T[] array, int i, int j) {
