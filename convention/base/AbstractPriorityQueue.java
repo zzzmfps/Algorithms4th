@@ -3,7 +3,7 @@ package convention.base;
 import convention.ContainerConv;
 import convention.base.AbstractSort.Mode;
 
-public abstract class AbstractPriorityQueue<T extends Comparable<T>> implements ContainerConv<T> {
+public abstract class AbstractPriorityQueue<T> implements ContainerConv<T> {
 
     protected Mode mode;
     protected int size;

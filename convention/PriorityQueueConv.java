@@ -1,6 +1,6 @@
 package convention;
 
-public interface PriorityQueueConv<T extends Comparable<T>> extends ContainerConv<T> {
+public interface PriorityQueueConv<T> extends ContainerConv<T> {
 
     public void insert(T value);
 
