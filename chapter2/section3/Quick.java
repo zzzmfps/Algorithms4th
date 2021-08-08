@@ -3,6 +3,7 @@ package chapter2.section3;
 import chapter1.section3.Stack;
 import chapter2.section1.Insertion;
 import convention.base.AbstractSort;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class Quick extends AbstractSort {
 
@@ -226,6 +227,28 @@ public class Quick extends AbstractSort {
         pivot = AbstractSort.less(array[i], array[begin]) ? i : i - 1;
         AbstractSort.exch(array, begin, pivot);
         return pivot;
+    }
+
+    public static <T extends Comparable<T>> T select(T[] array, int k) {
+        if (k < 0 || k >= array.length) {
+            return null;
+        }
+        StdRandom.shuffle(array);
+        return Quick.select(array, k, 0, array.length - 1);
+    }
+
+    private static <T extends Comparable<T>> T select(T[] array, int k, int l, int r) { // as `select`
+        if (l == r) {
+            return array[l];
+        }
+        int i = Quick.partition(array, l, r + 1);
+        if (i == k) {
+            return array[i];
+        }
+        if (i < k) {
+            return Quick.select(array, k, i + 1, r);
+        }
+        return Quick.select(array, k, l, i - 1);
     }
 
 }
