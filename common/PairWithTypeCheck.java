@@ -1,6 +1,6 @@
 package common;
 
-public class PairWithTypeCheck<T, U> extends Pair<T, U> {
+public class PairWithTypeCheck<T extends Comparable<T>, U extends Comparable<U>> extends Pair<T, U> {
 
     private final Class<T> typeT;
     private final Class<U> typeU;
