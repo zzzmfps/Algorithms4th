@@ -1,8 +1,10 @@
 package chapter1.section3;
 
+import java.util.Iterator;
+
 import convention.QueueConv;
 
-public class Queue<T> implements QueueConv<T> {
+public class Queue<T> implements QueueConv<T>, Iterable<T> {
 
     protected Node<T> front, last;
     protected int size;
@@ -73,6 +75,11 @@ public class Queue<T> implements QueueConv<T> {
             this.offer(value);
         }
         this.size += queue.size;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIterator<>(this.front);
     }
 
     @Override
