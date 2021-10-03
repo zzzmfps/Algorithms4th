@@ -1,10 +1,11 @@
 package chapter1.section3;
 
+import common.ListNode;
 import convention.ListConv;
 
 public class List<T> implements ListConv<T> {
 
-    private Node<T> first, last;
+    private ListNode<T> first, last;
     private int N;
 
     @Override
@@ -23,17 +24,17 @@ public class List<T> implements ListConv<T> {
         this.N = 0;
     }
 
-    public Node<T> first() {
+    public ListNode<T> first() {
         return this.first;
     }
 
-    public Node<T> last() {
+    public ListNode<T> last() {
         return this.last;
     }
 
     @Override
     public void add(final T value) {
-        final Node<T> added = new Node<T>(value, null);
+        final ListNode<T> added = new ListNode<T>(value, null);
         if (0 == this.N) {
             this.first = this.last = added;
         } else {
@@ -48,7 +49,7 @@ public class List<T> implements ListConv<T> {
         if (index < 0 || index >= this.N) {
             return null;
         }
-        Node<T> res = this.first;
+        ListNode<T> res = this.first;
         for (int i = 0; i < index; ++i) {
             res = res.next;
         }
@@ -66,7 +67,7 @@ public class List<T> implements ListConv<T> {
         if (k < 0 || k > this.N - 1) {
             return null;
         }
-        Node<T> cur = this.first;
+        ListNode<T> cur = this.first;
         for (int i = 1; i < k; ++i) {
             cur = cur.next;
         }
@@ -78,7 +79,7 @@ public class List<T> implements ListConv<T> {
 
     public int remove(final T value) {
         int count = 0;
-        Node<T> prev = new Node<T>(null, this.first);
+        ListNode<T> prev = new ListNode<T>(null, this.first);
         while (null != prev.next) {
             if (prev.next.value != value) {
                 prev = prev.next;
@@ -112,7 +113,7 @@ public class List<T> implements ListConv<T> {
         if (1 == this.N) {
             this.first = this.last = null;
         } else {
-            Node<T> cur = this.first;
+            ListNode<T> cur = this.first;
             while (cur.next != this.last) {
                 cur = cur.next;
             }
@@ -123,8 +124,8 @@ public class List<T> implements ListConv<T> {
         return deleted;
     }
 
-    public Node<T> find(final T value) {
-        Node<T> cur = this.first;
+    public ListNode<T> find(final T value) {
+        ListNode<T> cur = this.first;
         while (null != cur) {
             if (cur.value == value) {
                 return cur;
@@ -134,7 +135,7 @@ public class List<T> implements ListConv<T> {
         return null;
     }
 
-    public void removeAfter(final Node<T> node) {
+    public void removeAfter(final ListNode<T> node) {
         if (null == node || null == node.next) {
             return;
         }
@@ -148,7 +149,7 @@ public class List<T> implements ListConv<T> {
         --this.N;
     }
 
-    public void insertAfter(final Node<T> node, final Node<T> newNode) {
+    public void insertAfter(final ListNode<T> node, final ListNode<T> newNode) {
         if (null == node || null == newNode) {
             return;
         }
@@ -160,7 +161,7 @@ public class List<T> implements ListConv<T> {
         ++this.N;
     }
 
-    public static int max(Node<Integer> node) {
+    public static int max(ListNode<Integer> node) {
         int max = 0;
         while (null != node) {
             max = Math.max(max, node.value);
@@ -169,7 +170,7 @@ public class List<T> implements ListConv<T> {
         return max;
     }
 
-    public static int maxWithRecursion(final Node<Integer> node) {
+    public static int maxWithRecursion(final ListNode<Integer> node) {
         if (null == node) {
             return 0;
         }
@@ -180,7 +181,7 @@ public class List<T> implements ListConv<T> {
     public String toString() {
         final StringBuilder builder = new StringBuilder(
                 "List [N=" + N + ", first=" + first + ", last=" + last + "]\n\t");
-        Node<T> it = this.first;
+        ListNode<T> it = this.first;
         while (null != it) {
             builder.append((it == this.first ? "" : " -> ") + it.value);
             it = it.next;

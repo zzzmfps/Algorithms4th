@@ -1,10 +1,11 @@
 package chapter1.section3;
 
+import common.ListNode;
 import convention.ContainerConv;
 
 public class Steque<T> implements ContainerConv<T> {
 
-    protected Node<T> front, last;
+    protected ListNode<T> front, last;
     protected int size;
 
     @Override
@@ -38,7 +39,7 @@ public class Steque<T> implements ContainerConv<T> {
     }
 
     public void push(final T value) {
-        final Node<T> node = new Node<T>(value, null);
+        final ListNode<T> node = new ListNode<T>(value, null);
         if (null == this.last) {
             this.front = this.last = node;
         } else {
@@ -52,7 +53,7 @@ public class Steque<T> implements ContainerConv<T> {
         if (this.isEmpty()) {
             return null;
         }
-        Node<T> prev = new Node<T>(null, this.front);
+        ListNode<T> prev = new ListNode<T>(null, this.front);
         for (int i = 1; i < this.size; ++i) {
             prev = prev.next;
         }
@@ -82,7 +83,7 @@ public class Steque<T> implements ContainerConv<T> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Steque [front=" + front + ", last=" + last + "]\n\t");
-        Node<T> it = this.front;
+        ListNode<T> it = this.front;
         while (null != it) {
             sb.append((it == this.front ? "" : " -> ") + it.value);
             it = it.next;

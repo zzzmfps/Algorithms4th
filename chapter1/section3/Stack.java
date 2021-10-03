@@ -2,11 +2,12 @@ package chapter1.section3;
 
 import java.util.Iterator;
 
+import common.ListNode;
 import convention.StackConv;
 
 public class Stack<T> implements StackConv<T>, Iterable<T> {
 
-    private Node<T> first;
+    private ListNode<T> first;
     private int N;
     private final int[] counts = new int[2]; // fail-fast
 
@@ -36,7 +37,7 @@ public class Stack<T> implements StackConv<T>, Iterable<T> {
 
     @Override
     public void push(final T value) {
-        this.first = new Node<T>(value, this.first);
+        this.first = new ListNode<T>(value, this.first);
         ++this.N;
         ++this.counts[0];
     }

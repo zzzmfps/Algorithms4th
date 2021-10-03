@@ -1,10 +1,11 @@
 package chapter1.section3;
 
+import common.ListNode;
 import convention.QueueConv;
 
 public class GeneralizedQueueUsingLinkedList<T> implements QueueConv<T> {
 
-    private Node<T> first, last;
+    private ListNode<T> first, last;
     private int size;
 
     @Override
@@ -25,7 +26,7 @@ public class GeneralizedQueueUsingLinkedList<T> implements QueueConv<T> {
 
     @Override
     public void offer(final T value) {
-        final Node<T> node = new Node<T>(value, null);
+        final ListNode<T> node = new ListNode<T>(value, null);
         if (this.isEmpty()) {
             this.first = this.last = node;
         } else {
@@ -54,7 +55,7 @@ public class GeneralizedQueueUsingLinkedList<T> implements QueueConv<T> {
             value = this.first.value;
             this.first = this.first.next;
         } else {
-            Node<T> cur = this.first;
+            ListNode<T> cur = this.first;
             for (int i = 2; i < k; ++i) {
                 cur = cur.next;
             }

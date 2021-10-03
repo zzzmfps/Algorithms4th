@@ -1,10 +1,11 @@
 package chapter1.section3;
 
+import common.ListNode;
 import convention.ListConv;
 
 public class LoopList<T> implements ListConv<T> {
 
-    private Node<T> last;
+    private ListNode<T> last;
     private int N;
 
     @Override
@@ -23,20 +24,20 @@ public class LoopList<T> implements ListConv<T> {
         this.N = 0;
     }
 
-    public Node<T> front() {
+    public ListNode<T> front() {
         if (null == this.last) {
             return null;
         }
         return this.last.next;
     }
 
-    public Node<T> last() {
+    public ListNode<T> last() {
         return this.last;
     }
 
     @Override
     public void add(final T value) {
-        final Node<T> node = new Node<T>(value, this.front());
+        final ListNode<T> node = new ListNode<T>(value, this.front());
         if (null == this.last) {
             this.last = node;
             this.last.next = this.last;
@@ -53,7 +54,7 @@ public class LoopList<T> implements ListConv<T> {
         if (index >= this.N) {
             return null;
         }
-        Node<T> cur = this.last;
+        ListNode<T> cur = this.last;
         for (int i = 0; i < index; ++i) {
             cur = cur.next;
         }
@@ -65,7 +66,7 @@ public class LoopList<T> implements ListConv<T> {
         if (index < 0 || index >= this.N) {
             return null;
         }
-        Node<T> prev = this.last;
+        ListNode<T> prev = this.last;
         for (int i = 0; i < index; ++i) {
             prev = prev.next;
         }
@@ -83,7 +84,7 @@ public class LoopList<T> implements ListConv<T> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("LoopList [N=" + N + ", last=" + last + "]\n\t");
-        Node<T> it = this.front();
+        ListNode<T> it = this.front();
         while (true) {
             sb.append((it == this.front() ? "" : " -> ") + it.value);
             it = it.next;

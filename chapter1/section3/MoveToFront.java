@@ -2,9 +2,11 @@ package chapter1.section3;
 
 import java.util.Arrays;
 
+import common.ListNode;
+
 public class MoveToFront {
 
-    private Node<Character> front;
+    private ListNode<Character> front;
     private final boolean[] exists;
 
     public MoveToFront(final String str) {
@@ -20,12 +22,12 @@ public class MoveToFront {
             return;
         }
         this.exists[c] = true;
-        final Node<Character> newHead = new Node<Character>(c, this.front);
+        final ListNode<Character> newHead = new ListNode<Character>(c, this.front);
         this.front = newHead;
     }
 
     private void moveChar(final char c) {
-        Node<Character> cur = new Node<Character>('\0', this.front);
+        ListNode<Character> cur = new ListNode<Character>('\0', this.front);
         while (null != cur.next) {
             if (cur.next.value == c) {
                 break;
@@ -35,7 +37,7 @@ public class MoveToFront {
         if (cur.next == this.front) {
             return;
         }
-        final Node<Character> tmp = cur.next;
+        final ListNode<Character> tmp = cur.next;
         cur.next = tmp.next;
         tmp.next = this.front;
         this.front = tmp;
@@ -45,7 +47,7 @@ public class MoveToFront {
     public String toString() {
         final StringBuilder builder = new StringBuilder(
                 "MoveToFront [exists=" + Arrays.toString(exists) + ", head=" + front + "]\n\t");
-        Node<Character> it = this.front;
+        ListNode<Character> it = this.front;
         while (null != it) {
             builder.append((it == this.front ? "" : " -> ") + it.value);
             it = it.next;

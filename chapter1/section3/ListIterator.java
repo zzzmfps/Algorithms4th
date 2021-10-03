@@ -2,11 +2,13 @@ package chapter1.section3;
 
 import java.util.Iterator;
 
+import common.ListNode;
+
 public class ListIterator<T> implements Iterator<T> {
 
-    private Node<T> current;
+    private ListNode<T> current;
 
-    public ListIterator(final Node<T> node) {
+    public ListIterator(final ListNode<T> node) {
         this.current = node;
     }
 

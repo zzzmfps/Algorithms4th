@@ -2,12 +2,14 @@ package chapter1.section3;
 
 import java.util.ConcurrentModificationException;
 
+import common.ListNode;
+
 public class ListFailFastIterator<T> extends ListIterator<T> {
 
     private final int[] origin;
     private final int[] counts;
 
-    public ListFailFastIterator(final Node<T> node, final int[] counts) {
+    public ListFailFastIterator(final ListNode<T> node, final int[] counts) {
         super(node);
         this.origin = new int[] { counts[0], counts[1] };
         this.counts = counts;

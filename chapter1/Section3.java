@@ -14,7 +14,6 @@ import chapter1.section3.GeneralizedQueueUsingLinkedList;
 import chapter1.section3.List;
 import chapter1.section3.LoopList;
 import chapter1.section3.MoveToFront;
-import chapter1.section3.Node;
 import chapter1.section3.Queue;
 import chapter1.section3.QueueUsingStacks;
 import chapter1.section3.RandomBag;
@@ -26,6 +25,7 @@ import chapter1.section3.Stack;
 import chapter1.section3.Steque;
 import chapter1.section3.TwoStacksUsingDeque;
 import chapter1.section3.TwoStacksUsingDeque.StackId;
+import common.ListNode;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
@@ -217,7 +217,7 @@ public class Section3 {
         list.add(1);
         list.add(2);
         list.add(3);
-        final Node<Integer> node = list.find(1);
+        final ListNode<Integer> node = list.find(1);
         list.removeAfter(node);
         StdOut.println(list);
     }
@@ -226,8 +226,8 @@ public class Section3 {
         final List<Integer> list = new List<>();
         list.add(1);
         list.add(3);
-        final Node<Integer> node = list.find(1);
-        list.insertAfter(node, new Node<Integer>(2, null));
+        final ListNode<Integer> node = list.find(1);
+        list.insertAfter(node, new ListNode<Integer>(2, null));
         StdOut.println(list);
     }
 
